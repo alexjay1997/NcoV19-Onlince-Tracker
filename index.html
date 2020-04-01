@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+<title>NcoV-19-Tracker</title>
+		<style>
+			*{
+			padding:0;
+			margin:0;
+			}
+			body{font-family:caliblri,sans-serif;
+			font-weight:100;
+			color:#491ceb;}
+			.top-header{
+			
+			background:#1d1d1d;
+			
+			}
+				.container{
+				max-width:1228px;
+				height:auto;
+				border:px solid green;
+				position:relative;
+				top:0;	
+				left:50%;
+				padding:12px;
+				transform:translate(-50%,0%);
+				
+				
+			}
+			
+			.logo-wrapper{
+			color:#bab8b8;
+			font-weight:100;
+			font-size:1.5em;
+			}
+			#country_list{
+				display: block;
+				line-height: 50px;
+			
+				font-size:20px;
+				font-weight:200;
+				text-align: ;
+				
+
+			}
+			#datas{
+				color:#1d1d1d;
+				background:#ffffff;
+				padding:10px;
+
+			}
+			#myTable{
+				border:px solid red;
+				width:100%;
+			
+			}
+		 #td_content{
+				display:block;
+				padding:20px;
+
+				}
+				tr{
+					box-shadow: 2px 01px 20px 1px #cccc;
+					margin:10px;
+					height:auto;
+					padding:10px;
+				}
+				#country_name{
+					color:rgb(148, 148, 148);
+				}
+				#total_deaths{
+					color:crimson;
+				}
+				#total_recovered{
+					color:rgb(45, 134, 45);
+				}
+				#myInput{
+					background-image: url('/img/search.png');
+  background-position: 10px 12px;
+  padding:12px 50px;width:400px;
+  border: 1px solid dimgray;
+  margin:15px;
+  font-size: 18px;
+  background-repeat: no-repeat;
+ 
+				}
+		</style>
+	</head>
+	<body>
+<!--*************--Start-- import jquery plugin**********-->		
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+ <!--*************--End-- import jquery plugin**********-->	
+
+ 				 <!-- Start API Virus Tracker-->
+<script>
+	
+
+$(function(){
+
+$.ajax({
+url: 'https://thevirustracker.com/free-api?countryTotals=ALL',
+type: "GET",
+dataType:"json",
+
+success : function(data){
+	$.each(data.countryitems , function(key , result){ // First Level
+		 $.each(result, function(keys , res ){  // The contents inside stars
+			 console.log(res)
+
+
+
+
+			 $("#datas").append('<tr id="country_list"><td id="td_content"><span id="country_name">Country:</span> '+res.title+'<br>Code:'+res.code+' <br>Total_Cases: '+res.total_cases+' <br><span id="total_recovered">Total_Recovered:</span> '+res.total_recovered+' <br><span id="total_deaths">Total_Deaths:</span> '+res.total_deaths+'<br>Total_New_Cases_Today: '+res.total_new_cases_today+'<br>Total_New_Deaths_Today: '+res.total_new_deaths_today+'<br>Total_Active_Cases: '+res.total_active_cases+'<br>Total_Unresolve: '+res.total_unresolved+'<br>Total_Serious_Cases: '+res.total_serious_cases+'</th></tr>');
+		
+
+		 });     
+	});
+}
+});
+
+
+
+
+});
+           
+
+		</script>
+<!-- End API Virus Tracker-->
+
+		<div class="page-wrapper">
+			<div class="top-header">
+				<div class="container">
+					<div class="logo-wrapper">
+						<label>Ncov-19-Online-Tracker</label>
+						</div>
+						
+				</div>
+			</div>
+				<div class="main-body">
+				<div class="container">
+				
+					
+					<br><br>
+					
+					<table id="myTable">
+						
+							
+						
+						
+						<tbody id="datas">
+							<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Country..." title="Type in a name"/>
+							</tbody>
+				</table>
+
+
+  
+		
+		<!--<script type="text/javascript" src="https://thevirustracker.com/embed.js"></script><div class="thevirustracker-widget" data-ccountryid="ALL" data-base="ALLDATA"></div>
+					--></div>
+				</div>
+		</div>
+
+
+		<script>
+			//for search
+			function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+			</script>
+	</body>
+</html>
